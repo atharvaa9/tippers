@@ -35,7 +35,7 @@ const ProductSubtitle = styled.p`
 const MainContent = styled.main`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 40px;
+  gap: 20px;
   margin: 0 auto 60px;
   max-width: 1200px;
   align-items: center;
@@ -48,13 +48,15 @@ const MainContent = styled.main`
 
 const ProductImage = styled.img`
   width: 100%;
-  scale: 0.7;
+  scale: 0.6;
   border-radius: 20px;
   box-shadow: 0 20px 40px rgba(163, 107, 255, 0.15);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+  will-change: transform;
   
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
   }
 `
 
@@ -88,10 +90,12 @@ const FeatureCard = styled.div`
   padding: 30px;
   border-radius: 15px;
   text-align: center;
-  transition: transform 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
   
   &:hover {
     transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(163, 107, 255, 0.1);
   }
 `
 
@@ -109,10 +113,12 @@ const Button = styled.button`
   color: white;
   font-size: 1.1rem;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
   
   &:hover {
     transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(163, 107, 255, 0.2);
   }
 `
 
@@ -168,6 +174,91 @@ const SecondaryButton = styled(Button)`
   
   &:hover {
     background: rgba(163, 107, 255, 0.1);
+    box-shadow: 0 5px 15px rgba(163, 107, 255, 0.1);
+  }
+`
+
+const ComparisonTable = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+  margin: 40px 0;
+  
+  th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  th {
+    color: #a36bff;
+    font-weight: bold;
+  }
+  
+  td {
+    color: #cecece;
+  }
+`
+
+const TestimonialSection = styled.section`
+  padding: 60px 0;
+  text-align: center;
+`
+
+const TestimonialGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  margin: 40px 0;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+`
+
+const TestimonialCard = styled.div`
+  background: rgba(255, 255, 255, 0.05);
+  padding: 30px;
+  border-radius: 15px;
+  text-align: left;
+  
+  blockquote {
+    font-style: italic;
+    margin-bottom: 20px;
+    color: #cecece;
+  }
+  
+  .author {
+    color: #a36bff;
+    font-weight: bold;
+  }
+`
+
+const FAQSection = styled.section`
+  margin: 60px 0;
+`
+
+const FAQItem = styled.div`
+  margin-bottom: 20px;
+  
+  h4 {
+    color: #ffffff;
+    margin-bottom: 10px;
+    cursor: pointer;
+    
+    &:before {
+      content: "Q: ";
+      color: #a36bff;
+    }
+  }
+  
+  p {
+    color: #cecece;
+    margin-left: 20px;
+    
+    &:before {
+      content: "A: ";
+      color: #ff6b6b;
+    }
   }
 `
 
@@ -229,6 +320,72 @@ export default function ProductPage() {
           <p>Seamless connection with quantum cloud services</p>
         </FeatureCard>
       </FeaturesGrid>
+
+      <TestimonialSection>
+        <ProductTitle>What Our Clients Say</ProductTitle>
+        <TestimonialGrid>
+          <TestimonialCard>
+            <blockquote>
+              "The Quantum Edge Pro has revolutionized our research capabilities. 
+              The processing power is unlike anything we've seen before."
+            </blockquote>
+            <p className="author">Dr. Sarah Chen, Quantum Research Institute</p>
+          </TestimonialCard>
+          <TestimonialCard>
+            <blockquote>
+              "Implementation was seamless, and the cloud integration 
+              capabilities have transformed our development workflow."
+            </blockquote>
+            <p className="author">James Wilson, Tech Innovation Labs</p>
+          </TestimonialCard>
+        </TestimonialGrid>
+      </TestimonialSection>
+
+      <ComparisonTable>
+        <thead>
+          <tr>
+            <th>Features</th>
+            <th>Quantum Edge Pro</th>
+            <th>Competitors</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Qubit Count</td>
+            <td>128</td>
+            <td>64</td>
+          </tr>
+          <tr>
+            <td>Error Correction</td>
+            <td>99.99%</td>
+            <td>98.5%</td>
+          </tr>
+          <tr>
+            <td>Cloud Integration</td>
+            <td>Built-in</td>
+            <td>Additional Setup Required</td>
+          </tr>
+        </tbody>
+      </ComparisonTable>
+
+      <FAQSection>
+        <ProductTitle>Frequently Asked Questions</ProductTitle>
+        <FAQItem>
+          <h4>What makes Quantum Edge Pro different?</h4>
+          <p>Our proprietary quantum architecture delivers twice the processing power 
+             while maintaining industry-leading error correction rates.</p>
+        </FAQItem>
+        <FAQItem>
+          <h4>How does the cloud integration work?</h4>
+          <p>The Quantum Edge Pro comes with built-in APIs and SDKs that seamlessly 
+             connect with major cloud providers and our quantum cloud services.</p>
+        </FAQItem>
+        <FAQItem>
+          <h4>What support options are available?</h4>
+          <p>We offer 24/7 technical support, comprehensive documentation, and 
+             optional on-site installation services.</p>
+        </FAQItem>
+      </FAQSection>
 
       <Footer>
         <p>Contact us: dev.atharavparte@gmail.com</p>
